@@ -18,9 +18,9 @@ Before running the script dump your ENS json files in `/ens_to_process` director
 
 ```
 [
-    {"name": "test1.eth"},
-    {"name": "test2.eth"},
-    {"name": "test3.eth"},
+    {"name": "test1"},
+    {"name": "test2"},
+    {"name": "test3"},
     ...,
     ...
 ]
