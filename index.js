@@ -1,4 +1,3 @@
-
 const ENS = require('ethereum-ens');
 const Web3 = require('web3');
 const path = require('path');
@@ -39,14 +38,16 @@ const processFile = async (file) => {
 				csvContent.name = item.trim() + '.eth';
 
 				try {
-					const res = await ens.resolver(csvContent.name).addr();
-					if (res) {
+					const res = await ens.owner(csvContent.name);
+					if (res == '0x0000000000000000000000000000000000000000' || res == '') {
+						csvContent.status = 'Available';
+						csvWriter.writeRecords([csvContent]).then(()=> {});
+					} else {
 						csvContent.status = 'Taken';
 						csvWriter.writeRecords([csvContent]).then(()=> {});
 					}
 				} catch (error) {
-					csvContent.status = 'Available';
-					csvWriter.writeRecords([csvContent]).then(()=> {});
+					console.error(`ERROR: ${error.message}`);
 				}
 				console.log(csvContent.name + ":\t" + csvContent.status);
 			}
