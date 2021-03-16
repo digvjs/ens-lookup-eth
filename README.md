@@ -10,20 +10,14 @@ Check if ENS is taken or available using this nodejs script.
 
 ## Knowledge guide
 
-* `/ens_to_process`:  Put the json files to be parsed in this directory.
+* `/ens_to_process`:  Put the CSV files to be parsed in this directory.
 * `/ens_processed`: Holds the files which are parsed successfully.
 * `/reports`: This directory holds the reports for every individual processed file.
 
-Before running the script dump your ENS json files in `/ens_to_process` directory. The format of the json should follow below format -
+Before running the script dump your ENS CSV files in `/ens_to_process` directory. The format of the CSV should follow below format -
 
 ```
-[
-    {"name": "test1"},
-    {"name": "test2"},
-    {"name": "test3"},
-    ...,
-    ...
-]
+test1,test2,test3,test4,....
 ```
 
 # Setup Guide
@@ -35,7 +29,7 @@ Before running the script dump your ENS json files in `/ens_to_process` director
     npm install
     ```
 
-* Next once you have some json files added to `/ens_to_process` directory then run the script -
+* Next once you have some CSV files added to `/ens_to_process` directory then run the script -
     ```
     npm index.js
     ```

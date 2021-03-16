@@ -31,12 +31,12 @@ const processFile = async (file) => {
 		});
 
 		const content = fs.readFileSync(path.join(DIR_TO_PROCESS, file), 'utf8');
-		const data = JSON.parse(content);
+		const data = content.split(",");
 
 		for (const item of data) {
-			if (item.name && item.name != '') {
+			if (item && item.trim() != '') {
 				const csvContent = {};
-				csvContent.name = item.name + '.eth';
+				csvContent.name = item.trim() + '.eth';
 
 				try {
 					const res = await ens.resolver(csvContent.name).addr();
@@ -51,6 +51,7 @@ const processFile = async (file) => {
 				console.log(csvContent.name + ":\t" + csvContent.status);
 			}
 		}
+
 
 		// Move file to processed
 		await renameFile(
@@ -83,8 +84,8 @@ const run = async () => {
 	console.info(`Files to process: ${files.length}`);
 	console.info(`Reading files from: ${DIR_TO_PROCESS}\n`);
 	for (const file of files) {
-		if (path.extname(file) != '.json') {
-			console.info(`Skipping FILE: ${file}. File not JSON.\n`);
+		if (path.extname(file) != '.csv') {
+			console.info(`Skipping FILE: ${file}. File not CSV.\n`);
 			continue;
 		}
 		console.info(`Processing FILE: ${file}...`);
